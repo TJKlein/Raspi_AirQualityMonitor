@@ -36,7 +36,7 @@ from influxdb import InfluxDBClient
 parser = argparse.ArgumentParser()
 parser.add_argument('--logdir', type=str, default='./logging',
                     help='path where to store logging')
-parser.add_argument('--sleep', type=int, default=2, help='time interval between sensor readouts')
+parser.add_argument('--sleep', type=int, default=5, help='time interval between sensor readouts')
 parser.add_argument('--sensorhost', type=str, default='127.0.0.1',
                     help='(IP) address of database')
 parser.add_argument('--pressure', type=int, default=944, help="pressure at geolocation (mbar)")
@@ -84,6 +84,17 @@ class SCD30(object):
         # catch closing of the program to avoid IC2 blocking
         signal.signal(signal.SIGINT, self.exit_hard)
         signal.signal(signal.SIGTERM, self.exit_gracefully)
+
+        # grep exits 0 if match found
+        deviceOnI2C = call(
+            "i2cdetect -y 1 0x61 0x61|grep '\--' -q", shell=True)
+
+
+        if deviceOnI2C:
+            self.logger.info("I2Cdetect found SCD30")
+        else:
+            self.logger.error("SCD30 (0x61) not found on I2C bus")
+            raise
 
 
     def calcCRC(self, TwoBdataArray):
@@ -307,6 +318,7 @@ def main():
    
     except:
         logger.error('Could not connect to database')
+        exit(1)
 
     try:
 
@@ -316,10 +328,11 @@ def main():
 
         scd30.connect()
 
-        logger.info("Connected to scd30")
+        logger.info("Connected to SCD30")
 
     except:
-        logger.error('Could not connect to scd30')
+        logger.error('Could not connect to SCD30')
+        exit(1)
 
     try:
         while True:
