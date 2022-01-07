@@ -1,4 +1,4 @@
-# RaspberryPi Project of measuring indoor air quality
+# Raspberry Pi Indoor Air Quality Monitor
 
 Objective of this repository is to provide code and instruction on how to turn your Raspberry Pi into an air measuring device.
 
