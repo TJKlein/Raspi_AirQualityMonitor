@@ -77,6 +77,9 @@ class SCD30(object):
         self.pressure_mbar = pressure_mbar
         self.MEAS_INTERVAL = MEAS_INTERVAL
 
+        self.DEFAULT_ERROR_COUNT = 20
+        self.fail_counter = self.DEFAULT_ERROR_COUNT
+
 
         # CRC checksum specifics
         self.f_crc8 = crcmod.mkCrcFun(0x131, 0xFF, False, 0x00)
@@ -250,16 +253,24 @@ class SCD30(object):
         time.sleep(0.5)
 
     def read_measurements(self):
+
+        if self.fail_counter == 0:
+            self.logger.error("Unable to read data from sensor. Exiting")
+            raise
         ret = self.i2cWrite([0x02, 0x02])
         if self.i2cWrite([0x02, 0x02]) == -1:
             self.exit_hard()
 
         data = self.read_n_bytes(3)
         if data == False:
+            self.fail_counter -= 1
+            time.sleep(0.25)
             return False
+        else:
+            self.fail_counter = self.DEFAULT_ERROR_COUNT
 
         if data[1] != 1:
-            time.sleep(0.1)
+            time.sleep(0.25)
 
         #read measurement
         self.i2cWrite([0x03, 0x00])
