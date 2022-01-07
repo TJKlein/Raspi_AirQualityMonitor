@@ -58,7 +58,7 @@ parser.add_argument(
     action="store_const", dest="loglevel", const=logging.INFO,
 )
 
-class scd30(object):
+class SCD30(object):
     """Class for controlling the scd-30 sensor"""
 
     def __init__(self, logger, PIGPIO_HOST='127.0.0.1', pressure_mbar=944, MEAS_INTERVAL=2):
@@ -311,7 +311,7 @@ def main():
     try:
 
         # create the handler for the SCD sensor
-        scd30 = scd30(logger=logger, PIGPIO_HOST=FLAGS.sensorhost,
+        scd30 = SCD30(logger=logger, PIGPIO_HOST=FLAGS.sensorhost,
                       pressure_mbar=FLAGS.pressure, MEAS_INTERVAL=FLAGS.sleep)
 
         scd30.connect()
