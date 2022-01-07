@@ -31,5 +31,5 @@ influx
 Second, we create the database with the desired retention policy:
 
 ```
-CREATE DATABASE mydb WITH DURATION 14d
+CREATE DATABASE mydb WITH DURATION 30d
 ```
