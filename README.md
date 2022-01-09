@@ -20,7 +20,27 @@ Objective of this repository is to provide code and instruction on how to turn y
 
 |  ![Raspi SDC30 Wiring](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/Raspi-wiring.png)
 |:--:| 
-| Illustration of how to connect the SDC30 (Seed Studio) with Grove connector to Raspberry Pi |
+| Illustration of how to connect the SCD30 (Seed Studio) with Grove connector to Raspberry Pi |
+
+Once you have connected your SCD30 to the Raspberry Pi, you can verify if it can be found:
+
+```shell
+i2cdetect -y 1 0x61 0x61
+```
+
+If everything was wired correctly, this should appear in the terminal:
+
+```shell
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                                                 
+10:                                                 
+20:                                                 
+30:                                                 
+40:                                                 
+50:                                                 
+60:    61                                           
+70:                        
+```
 
 ## Software Setup
 
