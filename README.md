@@ -1,6 +1,6 @@
 # Raspberry Pi Indoor Air Quality Monitor
 
-Objective of this repository is to provide code and instruction on how to turn your Raspberry Pi into an air measuring device.
+Objective of this repository is to provide code and instruction on how to turn your Raspberry Pi into an air measuring device. Given the correlation of Covid-19 particale density due to breathing and CO2, this can be be used (without warranty) as an indicator when the room needs ventilation.
 
 ## Hardware Requirements:
 - [Raspberry Pi 4](https://www.raspberrypi.org/)
