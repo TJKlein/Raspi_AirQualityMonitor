@@ -36,7 +36,7 @@ from influxdb import InfluxDBClient
 parser = argparse.ArgumentParser()
 parser.add_argument('--logdir', type=str, default='./logging',
                     help='path where to store logging')
-parser.add_argument('--sleep', type=int, default=5, help='time interval between sensor readouts')
+parser.add_argument('--meas_interval', type=int, default=2, help='time interval between sensor readouts')
 parser.add_argument('--sensorhost', type=str, default='127.0.0.1',
                     help='(IP) address of database')
 parser.add_argument('--pressure', type=int, default=944, help="pressure at geolocation (mbar)")
@@ -210,6 +210,25 @@ class SCD30(object):
         self.logger.error("Read measurement interval didnt return 3B")
         return -1
 
+    def set_meas_interval(self, meas_interval):
+    
+        
+        if self.i2cWrite([0x46, 0x00, 0x00, meas_interval,
+                          self.calcCRC([0x00, meas_interval])]) == -1:
+            self.logger.error("Writing of measurement interval unsuccessful")
+            self.exit_hard()
+            return -1
+
+        ret = self.read_meas_interval()
+        if ret == -1:
+            self.logger.error("Measurement interval update unsuccessful")
+            self.exit_hard()
+        elif ret == meas_interval:
+            self.logger.info("Measurement intervaled udpated successfully")
+            return meas_interval
+        else:
+            return -1
+
     def read_asc_status(self):
         
         if self.i2cWrite([0x53, 0x06]) == -1:
@@ -254,39 +273,46 @@ class SCD30(object):
 
     def read_measurements(self):
 
-        if self.fail_counter == 0:
-            self.logger.error("Unable to read data from sensor. Exiting")
-            raise
-        ret = self.i2cWrite([0x02, 0x02])
-        if self.i2cWrite([0x02, 0x02]) == -1:
-            self.exit_hard()
+        while True:
+            if self.fail_counter == 0:
+                self.logger.error("Unable to read data from sensor. Exiting")
+                raise
 
-        data = self.read_n_bytes(3)
-        if data == False:
-            self.fail_counter -= 1
-            time.sleep(0.25)
-            return False
-        else:
-            self.fail_counter = self.DEFAULT_ERROR_COUNT
+            if self.i2cWrite([0x02, 0x02]) == -1:
+                self.exit_hard()
 
-        if data[1] != 1:
-            time.sleep(0.25)
+            data = self.read_n_bytes(3)
+            if data == False:
+                self.fail_counter -= 1
+                time.sleep(0.1)
+                return False
+            else:
+                self.fail_counter = self.DEFAULT_ERROR_COUNT
 
-        #read measurement
-        self.i2cWrite([0x03, 0x00])
-        data = self.read_n_bytes(18)
-        
+            if data[1] == 1:
+                tmp = 1
+            else: 
+                self.fail_counter -= 1
+                time.sleep(0.1)
 
-        if data == False:
-            self.logger.warning("read data unsuccessful")
-            time.sleep(self.MEAS_INTERVAL)
-            return False
-        else:
-            float_co2 = self.calcFloat(data[0:5])
-            float_T = self.calcFloat(data[6:11])
-            float_rH = self.calcFloat(data[12:17])
+            #read measurement
+            self.i2cWrite([0x03, 0x00])
+            time.sleep(0.1)
+            data = self.read_n_bytes(18)
+            
 
-            return float_co2, float_T, float_rH
+            if data == False:
+                self.logger.warning("read data unsuccessful")
+                time.sleep(self.MEAS_INTERVAL)
+                return False
+            else:
+                float_co2 = self.calcFloat(data[0:5])
+                float_T = self.calcFloat(data[6:11])
+                float_rH = self.calcFloat(data[12:17])
+
+                return float_co2, float_T, float_rH
+
+        return False
 
 def main():
 
@@ -335,7 +361,7 @@ def main():
 
         # create the handler for the SCD sensor
         scd30 = SCD30(logger=logger, PIGPIO_HOST=FLAGS.sensorhost,
-                      pressure_mbar=FLAGS.pressure, MEAS_INTERVAL=FLAGS.sleep)
+                      pressure_mbar=FLAGS.pressure, MEAS_INTERVAL=FLAGS.meas_interval)
 
         scd30.connect()
 
@@ -346,6 +372,12 @@ def main():
         exit(1)
 
     try:
+
+        meas_interval = scd30.read_meas_interval()
+
+        if meas_interval != FLAGS.meas_interval:
+            scd30.set_meas_interval(FLAGS.meas_interval)
+
         while True:
             measurements = scd30.read_measurements()
 
@@ -383,8 +415,7 @@ def main():
                 else:
                     logger.debug("NaN sensor readouts")
 
-
-            time.sleep(FLAGS.sleep-0.1)
+            time.sleep(FLAGS.meas_interval-0.1)
 
 
     except KeyboardInterrupt:
