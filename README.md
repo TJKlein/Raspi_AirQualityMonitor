@@ -4,7 +4,7 @@ Objective of this repository is to provide code and instruction on how to turn y
 
 ## Hardware Requirements:
 - [Raspberry Pi 4](https://www.raspberrypi.org/)
-- [SCD30 Air Quality Sensor](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/) or the [Seed Studio version (with Grove connector)](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/)
+- [SCD30 Air Quality Sensor](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/) or the [Seed Studio version (with Grove connector)](https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD30-p-2911.html)
 - [5" LCD Display](https://www.waveshare.com/product/displays/lcd-oled/lcd-oled-1/5inch-hdmi-lcd-b-with-bicolor-case.htm)
 
 ## Software Requirements
