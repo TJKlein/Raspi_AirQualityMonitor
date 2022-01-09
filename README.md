@@ -54,6 +54,16 @@ make
 sudo make install
 ```
 
+In order to launch the pigpio daemon launch:
+```
+sudo pigpiod
+```
+
+If everything is installed and working properly, the following command should return some integer value:
+```
+pigs hwver
+```
+
 ### I2C Clock stretching
 
 In I2C communication, the master device determines the clock speed. However, there are situations where an I2C slave is not able to co-operate at the clock speed determined by the master device. To faciliate communication under these circumstances the clock speed needs to slow down. The mechanism behind this slow-down is referred to as clock stretching. For communicating with the SDC30, we need the clock cycles to be stretched to 200ms. To do so, we need a little tool.
