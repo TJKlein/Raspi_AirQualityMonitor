@@ -42,6 +42,41 @@ If everything was wired correctly, this should appear in the terminal:
 70:                        
 ```
 
+### GPIO Control
+
+The SDC30 is connected to the Raspberry via the GPIO IC2 bus. To control the GPIO we need the [pigpio](https://abyz.me.uk/rpi/pigpio/pigpiod.html) library. To install the library:
+
+```shell
+wget https://github.com/joan2937/pigpio/archive/master.zip
+unzip master.zip
+cd pigpio-master
+make
+sudo make install
+```
+
+### I2C Clock stretching
+
+In I2C communication, the master device determines the clock speed. However, there are situations where an I2C slave is not able to co-operate at the clock speed determined by the master device. To faciliate communication under these circumstances the clock speed needs to slow down. The mechanism behind this slow-down is referred to as clock stretching. For communicating with the SDC30, we need the clock cycles to be stretched to 200ms. To do so, we need a little tool.
+
+First, clone the resposity from Github:
+
+```
+https://github.com/raspihats/raspihats/tree/master/clk_stretch
+```
+
+Second, compile the source code:
+
+```
+gcc -o i2c1_set_clkt_tout i2c1_set_clkt_tout.c
+gcc -o i2c1_get_clkt_tout i2c1_get_clkt_tout.c
+```
+
+In order to stretch the clock cycle to 200 ms, run the following command:
+
+```
+./i2c1_set_clkt_tout 20000
+```
+
 ## Software Setup
 
 ### Database Setup
