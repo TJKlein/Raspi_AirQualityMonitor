@@ -61,3 +61,35 @@ Second, we create the database with the desired retention policy:
 ```
 CREATE DATABASE mydb WITH DURATION 30d
 ```
+
+### Dashboard Setup
+
+In order to visualize the air quality measurement data we use [Grafana](https://grafana.com/).  Grafana is an open source analytics and interactive visualization.
+
+
+#### Installation
+
+Detailed instructions on how to install Grafana on a Raspberry Pi can be found [here](https://grafana.com/tutorials/install-grafana-on-raspberry-pi/)
+
+First, we need add an authentication key to apt as well as adding the path to it:
+
+```
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+```
+
+Second, we install Grafana. In case you followed the steps above, you don't need to update the apt packages again (so you can omit the first command), and directly install:
+
+```
+sudo apt-get update
+sudo apt-get install -y grafana
+```
+
+Third, we configure the Grafana service to launch at boot time and start the service:
+
+```
+sudo /bin/systemctl enable grafana-server
+sudo /bin/systemctl start grafana-server
+```
+
+Now, we opening the browser and enter http://localhost:3000, you should see the Grafana login page. 
