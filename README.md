@@ -181,3 +181,10 @@ sudo /bin/systemctl start grafana-server
 ```
 
 Now, we opening the browser and enter http://localhost:3000, you should see the Grafana login page. 
+
+#### Dashboard Configuration
+In the directory './Grafana' you will find configurations of dashboars that visualize the sensor readings. These can be adapted easily to change the style. To import them, simply click on import and select the JSON files one by one.
+
+|  ![Grafana JSON Dashboard Import](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/Import_JSON.png)
+|:--:| 
+| Grafana dashboard import from JSON file. |
