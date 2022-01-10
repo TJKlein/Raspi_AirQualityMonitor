@@ -183,7 +183,21 @@ sudo /bin/systemctl start grafana-server
 Now, we opening the browser and enter http://localhost:3000, you should see the Grafana login page. 
 
 ### Dashboard Configuration
-In the directory './Grafana' you will find configurations of dashboars that visualize the sensor readings. These can be adapted easily to change the style. To import them, simply click on import and select the JSON files one by one. Here we have three dashboards. One for temperature, one for CO_2 level and an overview dashboard.
+To visualize data we use Grafana. However, before we can visualize something we need to define data source. In our case, the datasource is the InfluxDB database. Simply add it, in our case with the default settings:
+
+|  ![Grafana InfluxDB Datasource](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/InfluxDB_Input.png)
+|:--:| 
+| Grafana configured to have InfluxDB as datasource |
+
+Once you have configured InfluxDB, you can query values from it and visualize it in any way. Just select InfluxDB as datasource and then select the data field you want to visualize, e.g., CO_2 level. 
+
+|  ![Grafana CO_2 Level](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/InfluxDB_CO2.png)
+|:--:| 
+| Grafana dashboard connected with InfluxDB to read the CO_2 values. |
+
+
+In the directory './Grafana' you will find pre-configured dashboards that visualize the all sensor readings. Of course, these can be adapted easily and arbitrarily to change the style. To import them, simply click on import and select the JSON files one by one. Here we have three dashboards. One for temperature, one for CO_2 level and an overview dashboard.
+
 
 |  ![Grafana JSON Dashboard Import](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/Import_JSON.png)
 |:--:| 
