@@ -215,3 +215,26 @@ Next, you have to create a playlist. This is sort of an autopilot for visualizin
 |:--:| 
 | Grafana playlist properties |
 
+
+## Running the monitor
+
+Once we have setup all the component we are ready to launch the visualization. The most simply way is to open several session, e.g. using tmux. One session for writing the sensor readings into the database. Another session for running the Grafana service.
+
+In order to write the sensor scripts into InfluxDB, simply launch the Python script. If you have followed the instructions above, you can simply launch the script without arguments. Don't forget to launch the 'pigpio' and the 'clock stretching' as described above. Otherwise, the Python script will not be able to connect to the sensor.
+
+```
+python raspi_airdata.py
+```
+
+Last but not least, we want to start Grafana. You have to replace the <IP-address>, with the IP address your router or DNS-server has assigned to your Raspberry PI. Also you have to set the user name, e.g., admin and with the password. Then you are all set, and the Grafana dashboards should show up on your Raspberry Pi (or in your browser, if you connect to it via IP address):
+
+```
+sudo systemctl start grafana-server
+sudo systemctl stop grafana-server
+sudo systemctl restart grafana-server
+
+
+DISPLAY=:0.0 /usr/bin/grafana-kiosk --playlists --URL http://<IP-Address>:3000/playlists/play/3  --ignore-certificate-errors --login-method local --kiosk-mode full --username <USER-NAME> --password <YOUR PASSWORD>  --lxde --autofit
+```
+
+And this is it. I hope you enjoyed the tutorial!
