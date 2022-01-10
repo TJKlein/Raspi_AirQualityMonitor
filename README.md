@@ -10,6 +10,14 @@ Objective of this repository is to provide code and instruction on how to turn y
 
 
 
+
+
+|  ![Photo of Rasperry Pi Setup](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/raspi_setup.png)
+|:--:| 
+| Photo of setup with LCD screen |
+
+
+
 Disclaimer: This tutorial is in parts based on the [Unravel Github Repository](https://github.com/UnravelTEC/Raspi-Driver-SCD30).
 
 ## Hardware Requirements:
