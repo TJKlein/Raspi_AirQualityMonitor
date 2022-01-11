@@ -245,11 +245,13 @@ In order to write the sensor scripts into InfluxDB, simply launch the Python scr
 python raspi_airdata.py
 ```
 
-Depending on your geolocation, you might need to change the atmospheric pressure (default is: 944 mbar):
+Depending on your geolocation, you might need to change the atmospheric pressure (default is: 944 mbar). There are numerous tutorials on the internet on how to convert altitude to atmospheric pressure, e.g., [link](https://www.herramientasingenieria.com/onlinecalc/altitude/altitude.html)
 
 ```
 python raspi_airdata.py --pressure <your geolocation pressure>
 ```
+
+Alternatively, you might want to add a pressure sensor to your Raspberry Pi.
 
 Last but not least, we want to start Grafana. You have to replace the <IP-address>, with the IP address your router or DNS-server has assigned to your Raspberry PI. Also you have to set the user name, e.g., admin and with the password. Then you are all set, and the Grafana dashboards should show up on your Raspberry Pi (or in your browser, if you connect to it via IP address):
 
