@@ -25,6 +25,10 @@ Disclaimer: This tutorial is in parts based on the [Unravel Github Repository](h
 - [SCD30 Air Quality Sensor](https://www.sensirion.com/en/environmental-sensors/carbon-dioxide-sensors/carbon-dioxide-sensors-scd30/) or the [Seed Studio version (with Grove connector)](https://www.seeedstudio.com/Grove-CO2-Temperature-Humidity-Sensor-SCD30-p-2911.html)
 - [5" LCD Display](https://www.waveshare.com/product/displays/lcd-oled/lcd-oled-1/5inch-hdmi-lcd-b-with-bicolor-case.htm)
 
+Optional:
+- [In case you use the Seed Studio Sensor: Grove - 4 pin Female Jumper to Grove 4 pin Conversion Cable](https://www.seeedstudio.com/Grove-4-pin-Female-Jumper-to-Grove-4-pin-Conversion-Cable-5-PCs-per-PAck.html)
+- HDMI/USB cables for connecting the screen to the Raspberry Pi
+
 ## Software Requirements
 
 - [Python 3](https://www.python.org/downloads/)
