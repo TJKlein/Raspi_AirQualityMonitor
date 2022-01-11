@@ -245,7 +245,7 @@ In order to write the sensor scripts into InfluxDB, simply launch the Python scr
 python raspi_airdata.py
 ```
 
-Depending on your geolocation, you might need to change the atmospheric pressure (default is: 944 mbar). There are numerous tutorials on the internet on how to convert altitude to atmospheric pressure, e.g., [link](https://www.herramientasingenieria.com/onlinecalc/altitude/altitude.html)
+Depending on your geolocation, you might need to change the atmospheric pressure (default is: 944 mbar). There are numerous tutorials on the internet on how to convert altitude to atmospheric pressure, e.g., [link](https://www.herramientasingenieria.com/onlinecalc/altitude/altitude.html).
 
 ```
 python raspi_airdata.py --pressure <your geolocation pressure>
