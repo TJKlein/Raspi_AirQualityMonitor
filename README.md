@@ -18,7 +18,7 @@ Objective of this repository is to provide code and instruction on how to turn y
 
 
 
-Disclaimer: This tutorial is in parts based on the [Unravel Github Repository](https://github.com/UnravelTEC/Raspi-Driver-SCD30).
+Disclaimer: This tutorial is in parts based on the [Unravel Github Repository](https://github.com/UnravelTEC/Raspi-Driver-SCD30) (hence GPL 3.0)
 
 ## Hardware Requirements:
 - [Raspberry Pi 4](https://www.raspberrypi.org/)
