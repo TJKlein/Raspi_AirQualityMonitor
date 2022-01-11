@@ -158,7 +158,6 @@ Let's verify that everything is set-up correctly:
 
 ```
 SHOW RETENTION POLICIES ON mydb
-
 ```
 
 which should show:
