@@ -154,6 +154,22 @@ Second, we create the database with the desired retention policy:
 CREATE DATABASE mydb WITH DURATION 30d
 ```
 
+Let's verify that everything is set-up correctly:
+
+```
+SHOW RETENTION POLICIES ON mydb
+
+```
+
+which should show:
+
+```shell
+name    duration shardGroupDuration replicaN default
+----    -------- ------------------ -------- -------
+autogen 720h0m0s 168h0m0s           1        true
+```
+
+
 ### Dashboard Setup
 
 In order to visualize the air quality measurement data we use [Grafana](https://grafana.com/).  Grafana is an open source analytics and interactive visualization.
