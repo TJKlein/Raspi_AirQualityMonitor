@@ -1,6 +1,7 @@
 # Raspberry Pi Indoor Air Quality Monitor
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-red.svg)](#python)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
 Objective of this repository is to provide code and instruction on how to turn your Raspberry Pi into an air measuring device. Given the correlation of Covid-19 particale density due to breathing and CO2, this can be be used (without warranty) as an indicator when the room needs ventilation. 
 
