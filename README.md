@@ -45,7 +45,8 @@ Optional:
 
 |  ![Raspi SDC30 Wiring](https://github.com/TJKlein/Raspi_AirQualityMonitor/blob/main/images/Raspi-wiring.png)
 |:--:| 
-| Illustration of how to connect the SCD30 (Seed Studio) with Grove connector to Raspberry Pi |
+
+Illustration of how to connect the SCD30 (Seed Studio) with Grove connector to Raspberry Pi. Image source in parts: [link](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started) [![Creative Commons License v4](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/) 
 
 Once you have connected your SCD30 to the Raspberry Pi, you can verify if it can be found:
 
