@@ -268,4 +268,4 @@ sudo systemctl restart grafana-server
 DISPLAY=:0.0 /usr/bin/grafana-kiosk --playlists --URL http://<IP-Address>:3000/playlists/play/3  --ignore-certificate-errors --login-method local --kiosk-mode full --username <USER-NAME> --password <YOUR PASSWORD>  --lxde --autofit
 ```
 
-And this is it. I hope you enjoyed the tutorial!
+And this is it. I hope you enjoyed the tutorial.
